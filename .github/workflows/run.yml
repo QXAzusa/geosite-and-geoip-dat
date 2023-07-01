@@ -192,7 +192,7 @@ jobs:
           files: |
             ./publish/*
         env:
-          GITHUB_TOKEN: ${{ secrets.GITTOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Git push assets to "release" branch
         run: |
