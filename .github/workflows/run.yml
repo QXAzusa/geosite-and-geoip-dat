@@ -14,14 +14,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: delete-releases-workflows
+      - name: Delete old releases
         uses: ophub/delete-releases-workflows@v0.1.0
         with:
           delete_releases: true
           releases_keep_latest: 0
-          delete_workflows: true
+          delete_workflows: false
           workflows_keep_day: 10
           gh_token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Setup Go 1.x.y
         uses: actions/setup-go@v3
         with:
@@ -210,5 +211,6 @@ jobs:
           git checkout -b release
           git add .
           git commit -m "${{ env.RELEASE_NAME }}"
-          git remote add origin "https://${{ github.actor }}:${{ secrets.GITTOKEN }}@github.com/${{ github.repository }}"
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin release
+
