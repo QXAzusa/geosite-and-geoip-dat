@@ -14,6 +14,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: delete-releases-workflows
+        uses: ophub/delete-releases-workflows@v0.1.0
+        with:
+          delete_releases: true
+          releases_keep_latest: 0
+          delete_workflows: true
+          workflows_keep_day: 10
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Go 1.x.y
         uses: actions/setup-go@v3
         with:
